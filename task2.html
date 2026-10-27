@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Task 2 — Kanban Board</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/task2.js" defer></script>
+</head>
+<body>
+<header class="site-header"><nav aria-label="Main">
+  <a href="index.html">Home</a>
+  <a href="task1.html">Task 1 · Code Breaker</a>
+  <a href="task2.html" aria-current="page">Task 2 · Kanban</a>
+  <a href="task3.html">Task 3 · Ticket Builder</a>
+</nav></header>
+<main class="container">
+  <h1>Task 2 · Kanban Board</h1>
+  <section class="card" aria-label="Controls">
+    <div class="toolbar">
+      <div><label for="search">Search by title</label><input id="search" type="search" placeholder="e.g. logo" autocomplete="off"></div>
+      <div><label for="filter-tag">Filter by tag</label><select id="filter-tag"></select></div>
+      <div><label for="sort">Sort by priority</label>
+        <select id="sort">
+          <option value="none">Default order</option>
+          <option value="desc">High → Low</option>
+          <option value="asc">Low → High</option>
+        </select></div>
+      <div class="progress-box"><label for="progress">Finished cards: <span id="progress-text"></span></label><progress id="progress" max="1" value="0"></progress></div>
+    </div>
+  </section>
+  <section class="card" aria-label="Add a card">
+    <form id="add-form" class="add-form" novalidate>
+      <div><label for="new-title">New card title</label><input id="new-title" autocomplete="off"></div>
+      <div><label for="new-tag">Tag</label><select id="new-tag"></select></div>
+      <div><label for="new-priority">Priority</label>
+        <select id="new-priority"><option value="1">Low</option><option value="2" selected>Medium</option><option value="3">High</option></select></div>
+      <button class="btn" type="submit">Add to “To do”</button>
+    </form>
+  </section>
+  <p id="message" class="message" role="status" aria-live="polite"></p>
+  <p id="empty-all" class="message is-warning empty-all" role="status"></p>
+  <div id="board" class="board"></div>
+</main>
+</body></html>

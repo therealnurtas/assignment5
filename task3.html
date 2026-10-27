@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Task 3 — Ticket Builder</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/task3.js" defer></script>
+</head>
+<body>
+<header class="site-header"><nav aria-label="Main">
+  <a href="index.html">Home</a>
+  <a href="task1.html">Task 1 · Code Breaker</a>
+  <a href="task2.html">Task 2 · Kanban</a>
+  <a href="task3.html" aria-current="page">Task 3 · Ticket Builder</a>
+</nav></header>
+<main class="container">
+  <h1>Task 3 · Ticket Builder</h1>
+  <div class="layout">
+    <section class="card" aria-labelledby="form-title">
+      <h2 id="form-title">Book your ticket</h2>
+      <p id="error-summary" class="message" role="alert" tabindex="-1"></p>
+      <form id="booking-form" novalidate>
+        <div class="form-grid">
+          <div class="field full">
+            <label for="event">Event</label>
+            <select id="event" name="event" required aria-describedby="event-error"></select>
+            <p class="error" id="event-error"></p>
+          </div>
+          <div class="field">
+            <label for="date">Date</label>
+            <input id="date" name="date" type="date" required aria-describedby="date-hint date-error">
+            <p class="hint" id="date-hint"></p>
+            <p class="error" id="date-error"></p>
+          </div>
+          <div class="field">
+            <label for="type">Ticket type</label>
+            <select id="type" name="type" required aria-describedby="type-error"></select>
+            <p class="error" id="type-error"></p>
+          </div>
+          <div class="field">
+            <label for="quantity">Quantity</label>
+            <input id="quantity" name="quantity" type="number" min="1" max="10" step="1" required inputmode="numeric" aria-describedby="quantity-hint quantity-error">
+            <p class="hint" id="quantity-hint"></p>
+            <p class="error" id="quantity-error"></p>
+          </div>
+          <div class="field">
+            <label for="promo">Promo code (optional)</label>
+            <input id="promo" name="promo" type="text" autocomplete="off" aria-describedby="promo-error">
+            <p class="error" id="promo-error"></p>
+          </div>
+          <div class="field">
+            <label for="name">Full name</label>
+            <input id="name" name="name" type="text" required minlength="3" autocomplete="name" aria-describedby="name-error">
+            <p class="error" id="name-error"></p>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required autocomplete="email" aria-describedby="email-error">
+            <p class="error" id="email-error"></p>
+          </div>
+          <div class="field full"><button class="btn" type="submit">Book ticket</button></div>
+        </div>
+      </form>
+    </section>
+    <aside class="card preview" aria-labelledby="preview-title">
+      <h2 id="preview-title">Live preview</h2>
+      <div class="ticket" aria-live="polite">
+        <dl>
+          <dt>Event</dt><dd id="pv-event">—</dd>
+          <dt>Date</dt><dd id="pv-date">—</dd>
+          <dt>Type</dt><dd id="pv-type">—</dd>
+          <dt>Quantity</dt><dd id="pv-quantity">—</dd>
+          <dt>Name</dt><dd id="pv-name">—</dd>
+          <dt>Email</dt><dd id="pv-email">—</dd>
+          <dt>Promo</dt><dd id="pv-promo">—</dd>
+          <dt>Total</dt><dd id="pv-total" class="total">—</dd>
+        </dl>
+      </div>
+    </aside>
+  </div>
+  <section id="result" class="card" aria-live="polite" tabindex="-1" hidden></section>
+  <p class="hint">Test data: promo codes SAVE10, STUDENT20, VIP30. Student tickets need an “.edu” email (e.g. aidar@astanait.edu.kz).</p>
+</main>
+</body></html>
