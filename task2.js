@@ -207,10 +207,20 @@ boardEl.addEventListener("click", (event) => {
   const btn = event.target.closest("button[data-action]");
   if (!btn || btn.disabled) return;
   const id = Number(btn.dataset.id);
-  if (btn.dataset.action === "left") moveCard(id, -1);
-  if (btn.dataset.action === "right") moveCard(id, 1);
-  if (btn.dataset.action === "delete") deleteCard(id);
+  const action = btn.dataset.action;
+  if (action === "left") moveCard(id, -1);
+  if (action === "right") moveCard(id, 1);
+  if (action === "delete") deleteCard(id);
+  restoreFocus(action, id);
 });
+
+// render() rebuilds the buttons, so the keyboard focus would be lost: put it back
+function restoreFocus(action, id) {
+  if (action === "delete") return;
+  const same = boardEl.querySelector(`button[data-action="${action}"][data-id="${id}"]:not(:disabled)`);
+  const other = boardEl.querySelector(`button[data-id="${id}"]:not(:disabled):not([data-action="delete"])`);
+  (same ?? other)?.focus();
+}
 
 searchEl.addEventListener("input", () => { filters.query = searchEl.value; setMessage("", "info"); render(); });
 tagFilterEl.addEventListener("change", () => { filters.tag = tagFilterEl.value; setMessage("", "info"); render(); });
@@ -233,6 +243,7 @@ addForm.addEventListener("submit", (event) => {
   }
   addCard(title, newTagEl.value, Number(newPriorityEl.value));
   addForm.reset();
+  newTitleEl.focus();
 });
 
 // ---------- Init: fill selects from the TAGS array ----------

@@ -35,7 +35,8 @@ for (const name of FIELD_NAMES) fields[name] = document.getElementById(name);
 const pv = (id) => document.getElementById(`pv-${id}`);
 
 const touched = new Set(); // fields the user has already left (blur)
-const TODAY = new Date().toISOString().slice(0, 10);
+const now = new Date();
+const TODAY = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`; // local date, not UTC
 fields.date.min = TODAY;
 
 // ---------- Helpers ----------
@@ -137,7 +138,9 @@ const rules = {
   name: (value) => {
     const words = value.split(/\s+/).filter(Boolean);
     if (words.length < 2) return "Enter first name and last name (at least two words).";
-    if (!/^[\p{L}][\p{L}'’-]+$/u.test(words[0]) || words.some((w) => !/^[\p{L}'’-]{2,}$/u.test(w))) {
+    // every word: only letters (and ' ’ -), and at least 2 real letters
+    const goodWord = (w) => /^[\p{L}'’-]+$/u.test(w) && (w.match(/\p{L}/gu) ?? []).length >= 2;
+    if (!words.every(goodWord)) {
       return "Each name part needs at least 2 letters and no digits or symbols.";
     }
     return "";
